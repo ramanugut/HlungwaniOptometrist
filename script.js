@@ -1,21 +1,46 @@
+// Load the final polish layer after the base styles. The page loader hides any visual flash while it loads.
+if (!document.querySelector('link[href="polish.css"]')) {
+  const polish = document.createElement('link');
+  polish.rel = 'stylesheet';
+  polish.href = 'polish.css';
+  document.head.appendChild(polish);
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
+
+const closeMenu = () => {
+  if (!menuToggle || !mainNav) return;
+  mainNav.classList.remove('open');
+  document.body.classList.remove('nav-open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.textContent = '☰';
+};
 
 if (menuToggle && mainNav) {
   menuToggle.addEventListener('click', () => {
     const open = mainNav.classList.toggle('open');
+    document.body.classList.toggle('nav-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.textContent = open ? '✕' : '☰';
   });
 
-  mainNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.textContent = '☰';
-    });
+  mainNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mainNav.classList.contains('open')) return;
+    if (mainNav.contains(event.target) || menuToggle.contains(event.target)) return;
+    closeMenu();
   });
 }
+
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const pageKey = currentPage === 'index.html' ? 'home' : currentPage.replace('.html', '');
+document.body.classList.add(`page-${pageKey}`);
 
 // Shared image wiring. All uploaded images now live in /assets with clear names.
 const assetAliases = {
@@ -28,9 +53,7 @@ const assetAliases = {
 
 document.querySelectorAll('img.local-asset').forEach((img) => {
   const originalSrc = img.getAttribute('src');
-  if (originalSrc && assetAliases[originalSrc]) {
-    img.setAttribute('src', assetAliases[originalSrc]);
-  }
+  if (originalSrc && assetAliases[originalSrc]) img.setAttribute('src', assetAliases[originalSrc]);
 });
 
 // Use the logo icon as the browser tab icon on every page.
@@ -42,40 +65,19 @@ if (!document.querySelector('link[rel="icon"]')) {
   document.head.appendChild(favicon);
 }
 
-// Small styles used only for the wired image panels below.
-const wiredImageStyles = document.createElement('style');
-wiredImageStyles.textContent = `
-  .wired-photo-panel{position:relative!important;display:block!important;background:#eaf5ff!important;overflow:hidden!important}
-  .wired-photo-panel .wired-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-  .service-detail-thumb{width:74px;height:74px;border-radius:20px;object-fit:cover;border:1px solid #d1e8f8;background:#eef7ff}
-  .services-photo-strip{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:22px;align-items:center;margin:0 0 26px;background:#fff;border:1px solid #dcebf6;border-radius:24px;overflow:hidden;box-shadow:0 12px 32px rgba(17,82,138,.06)}
-  .services-photo-strip img{width:100%;height:260px;object-fit:cover}
-  .services-photo-strip div{padding:26px 28px 26px 6px}
-  .services-photo-strip h3{margin:0 0 8px;color:#0b4f97;font-size:26px}
-  .services-photo-strip p{margin:0;color:#63758d;line-height:1.65}
-  .appointment-art.appointment-art-photo{right:0;top:0;bottom:0;width:43%;height:100%;font-size:0;transform:none;overflow:hidden;opacity:.62}
-  .appointment-art.appointment-art-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
-  .booking-brand-art{display:block;width:min(260px,78%);margin:24px auto 0;border-radius:22px;box-shadow:0 12px 32px rgba(5,73,142,.16)}
-  @media(max-width:900px){.service-detail-thumb{width:58px;height:58px;border-radius:15px}.services-photo-strip{grid-template-columns:1fr}.services-photo-strip img{height:220px}.services-photo-strip div{padding:0 22px 22px}.booking-brand-art{width:min(220px,65%)}}
-  @media(max-width:640px){.services-photo-strip{border-radius:18px;margin-bottom:18px}.services-photo-strip img{height:180px}.services-photo-strip div{padding:0 18px 18px}.services-photo-strip h3{font-size:21px}.appointment-art.appointment-art-photo{display:none}.booking-brand-art{width:min(190px,62%);margin-top:18px}}
-`;
-document.head.appendChild(wiredImageStyles);
-
 // Use the general eyewear photo in the home appointment panel instead of an emoji.
 const appointmentArt = document.querySelector('.appointment-art');
 if (appointmentArt) {
   appointmentArt.classList.add('appointment-art-photo');
-  appointmentArt.innerHTML = '<img src="assets/eyewear-store.png" alt="Eyewear selection" loading="lazy">';
+  appointmentArt.innerHTML = '<img src="assets/eyewear-store.png" alt="Eyewear selection" loading="lazy" decoding="async">';
 }
-
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
 // About page: use the actual consultation image instead of the CSS eye placeholder.
 if (currentPage === 'about.html') {
   const visualPanel = document.querySelector('.visual-panel');
   if (visualPanel) {
     visualPanel.classList.add('wired-photo-panel');
-    visualPanel.innerHTML = '<img class="wired-photo" src="assets/consultation.png" alt="Optometrist consultation" loading="lazy">';
+    visualPanel.innerHTML = '<img class="wired-photo" src="assets/consultation.png" alt="Optometrist consultation" loading="lazy" decoding="async">';
   }
 }
 
@@ -84,11 +86,11 @@ if (currentPage === 'conditions.html') {
   const visualPanel = document.querySelector('.visual-panel');
   if (visualPanel) {
     visualPanel.classList.add('wired-photo-panel');
-    visualPanel.innerHTML = '<img class="wired-photo" src="assets/service-eye-exam-closeup.png" alt="Close-up eye examination" loading="lazy">';
+    visualPanel.innerHTML = '<img class="wired-photo" src="assets/service-eye-exam-closeup.png" alt="Close-up eye examination" loading="lazy" decoding="async">';
   }
 }
 
-// Services page: use the uploaded service photos in the matching service cards.
+// Services page: use uploaded photos only where the image genuinely matches the service.
 if (currentPage === 'services.html') {
   const detailImages = {
     'eye-exam': ['assets/service-eye-exam-closeup.png', 'Comprehensive eye examination'],
@@ -105,37 +107,30 @@ if (currentPage === 'services.html') {
     img.src = src;
     img.alt = alt;
     img.loading = 'lazy';
+    img.decoding = 'async';
     icon.replaceWith(img);
   });
 
-  // The remaining eyewear-store photo is used as a general eyewear visual rather than mislabelling it as sunglasses.
   const serviceGrid = document.querySelector('.service-detail-grid');
   if (serviceGrid && !document.querySelector('.services-photo-strip')) {
     const strip = document.createElement('div');
     strip.className = 'services-photo-strip';
-    strip.innerHTML = '<img src="assets/eyewear-store.png" alt="Eyewear frames in an optometry store" loading="lazy"><div><h3>Eyewear for everyday life</h3><p>Explore frames and lenses with practical guidance so you can choose eyewear that feels comfortable and suits your daily needs.</p></div>';
+    strip.innerHTML = '<img src="assets/eyewear-store.png" alt="Eyewear frames in an optometry store" loading="lazy" decoding="async"><div><h3>Eyewear for everyday life</h3><p>Explore frames and lenses with practical guidance so you can choose eyewear that feels comfortable and suits your daily needs.</p></div>';
     serviceGrid.parentNode.insertBefore(strip, serviceGrid);
   }
 }
 
-// Appointment page: use the full brand artwork as a subtle finishing touch in the booking guide.
-if (currentPage === 'appointment.html') {
-  const bookingIntro = document.querySelector('.booking-intro');
-  if (bookingIntro && !bookingIntro.querySelector('.booking-brand-art')) {
-    const art = document.createElement('img');
-    art.className = 'booking-brand-art';
-    art.src = 'assets/logo-full.png';
-    art.alt = 'Hlungwani T.P Optometrist';
-    art.loading = 'lazy';
-    bookingIntro.appendChild(art);
-  }
-}
+// Avoid downloading non-critical imagery eagerly.
+document.querySelectorAll('.service-card img').forEach((img) => {
+  img.loading = 'lazy';
+  img.decoding = 'async';
+});
 
 // Local assets fail gracefully if image files are missing or renamed.
 document.querySelectorAll('.local-asset').forEach((img) => {
   img.addEventListener('error', () => {
     const fallback = img.dataset.fallback;
-    if (fallback && img.src !== fallback) {
+    if (fallback && img.getAttribute('src') !== fallback) {
       img.src = fallback;
       return;
     }
@@ -152,17 +147,17 @@ const pageLoader = document.getElementById('pageLoader');
 const hideLoader = () => {
   if (!pageLoader || pageLoader.classList.contains('is-hidden')) return;
   pageLoader.classList.add('is-hidden');
-  setTimeout(() => pageLoader.remove(), 350);
+  setTimeout(() => pageLoader.remove(), 300);
 };
 
 if (document.readyState === 'complete') {
-  setTimeout(hideLoader, 180);
+  setTimeout(hideLoader, 120);
 } else {
-  window.addEventListener('load', () => setTimeout(hideLoader, 120), { once: true });
-  setTimeout(hideLoader, 1100);
+  window.addEventListener('load', () => setTimeout(hideLoader, 90), { once: true });
+  setTimeout(hideLoader, 1000);
 }
 
-// Smooth reveals, kept small for performance and disabled for reduced-motion users.
+// Smooth reveals, kept subtle for performance and disabled for reduced-motion users.
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!reduceMotion && 'IntersectionObserver' in window) {
   document.body.classList.add('motion-ready');
@@ -179,21 +174,35 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  }, { rootMargin: '0px 0px -7% 0px', threshold: 0.06 });
 
   revealItems.forEach((item) => revealObserver.observe(item));
 }
 
-// Home-page hash navigation support, if hash links are ever used again.
-const sections = [...document.querySelectorAll('main section[id]')];
-const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
-if (navLinks.length && 'IntersectionObserver' in window) {
-  const navObserver = new IntersectionObserver((entries) => {
-    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
-  }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
-  sections.forEach((section) => navObserver.observe(section));
+// Keep the floating WhatsApp action useful without covering forms, CTAs or the footer.
+const whatsappFloat = document.querySelector('.whatsapp-float');
+if (whatsappFloat) {
+  const interactiveFields = 'input, select, textarea, button';
+  document.addEventListener('focusin', (event) => {
+    if (event.target.matches(interactiveFields) && event.target.closest('form')) {
+      whatsappFloat.classList.add('is-context-hidden');
+    }
+  });
+  document.addEventListener('focusout', (event) => {
+    if (event.target.matches(interactiveFields) && event.target.closest('form')) {
+      setTimeout(() => {
+        if (!document.activeElement?.closest('form')) whatsappFloat.classList.remove('is-context-hidden');
+      }, 100);
+    }
+  });
+
+  const footer = document.querySelector('.footer');
+  if (footer && 'IntersectionObserver' in window) {
+    const footerObserver = new IntersectionObserver(([entry]) => {
+      whatsappFloat.classList.toggle('is-footer-hidden', entry.isIntersecting);
+    }, { threshold: 0.08 });
+    footerObserver.observe(footer);
+  }
 }
 
 // Appointment form: no database required. The request is prepared and sent through WhatsApp.
@@ -209,7 +218,6 @@ if (preferredDate) {
   preferredDate.min = localToday;
 }
 
-// Preselect a service when coming from a service link such as appointment.html?service=Contact%20Lenses.
 if (serviceSelect) {
   const requestedService = new URLSearchParams(window.location.search).get('service');
   if (requestedService) {
@@ -265,6 +273,6 @@ if (appointmentForm) {
     setTimeout(() => {
       if (submitBooking) submitBooking.classList.remove('is-sending');
       if (formStatus) formStatus.textContent = 'Your request is ready in WhatsApp. Send the message to complete it.';
-    }, 700);
+    }, 650);
   });
 }
