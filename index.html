@@ -11,8 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="mobile.css">
+  <link rel="stylesheet" href="enhancements.css">
 </head>
 <body>
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Loading Hlungwani T.P Optometrist">
+    <div class="loader-inner">
+      <div class="loader-eye" aria-hidden="true"><div class="loader-iris"><span class="loader-pupil"></span></div></div>
+      <div class="loader-copy">Hlungwani T.P Optometrist<small>Bringing your vision into focus</small></div>
+      <div class="loader-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+
   <div class="topbar">
     <div class="container topbar-inner">
       <div class="top-contact">
@@ -69,7 +78,7 @@
           </div>
         </div>
       </div>
-      <div class="priority-badge" aria-label="Your Vision, Our Priority"><span>◉</span><small>Your Vision</small><strong>Our Priority</strong></div>
+      <div class="priority-badge" aria-label="Your Vision, Our Priority"><span class="blink-eye">◉</span><small>Your Vision</small><strong>Our Priority</strong></div>
     </section>
 
     <section class="services section" id="services">
@@ -81,7 +90,7 @@
           <article class="service-card"><div class="service-image-wrap"><img class="local-asset" src="assets/contact-lenses.jpg" alt="Contact lenses" data-fallback="https://images.unsplash.com/photo-1588786849374-dc6e7d8f5647?auto=format&fit=crop&w=500&q=80"></div><h3>Contact Lenses</h3><p>Comfortable and safe contact lenses</p><a href="#appointment" aria-label="Ask about contact lenses">›</a></article>
           <article class="service-card"><div class="service-image-wrap"><img class="local-asset" src="assets/sunglasses.jpg" alt="Sunglasses" data-fallback="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=500&q=80"></div><h3>Sunglasses</h3><p>Stylish and UV-protected sunglasses</p><a href="#appointment" aria-label="Ask about sunglasses">›</a></article>
           <article class="service-card"><div class="service-image-wrap service-icon">E<br><small>F P</small></div><h3>Traffic & Eye Test<br>Certificate</h3><p>Official eye-test certificates</p><a href="#appointment" aria-label="Book traffic eye test">›</a></article>
-          <article class="service-card"><div class="service-image-wrap service-icon eye-symbol">◉</div><h3>Screening of Chronic<br>Eye Conditions</h3><p>Early detection supports healthier vision</p><a href="#appointment" aria-label="Book screening">›</a></article>
+          <article class="service-card"><div class="service-image-wrap service-icon eye-symbol blink-eye">◉</div><h3>Screening of Chronic<br>Eye Conditions</h3><p>Early detection supports healthier vision</p><a href="#appointment" aria-label="Book screening">›</a></article>
         </div>
       </div>
     </section>
@@ -98,14 +107,88 @@
           </div>
         </div>
 
-        <div class="appointment-panel" id="appointment">
+        <div class="appointment-panel">
           <div class="appointment-copy">
             <h2>Need an Appointment?</h2>
             <p>We're here to help you see better.</p>
-            <a class="contact-pill primary-pill" href="tel:+27761329121">☎ Call: 076 132 9121 / 071 113 5488</a>
-            <a class="contact-pill" href="mailto:vutomie@gmail.com">✉ vutomie@gmail.com</a>
+            <a class="contact-pill primary-pill" href="#appointment">▣ Send an appointment request</a>
+            <a class="contact-pill" href="tel:+27761329121">☎ 076 132 9121 / 071 113 5488</a>
           </div>
           <div class="appointment-art" aria-hidden="true">👓</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="appointment">
+      <div class="container booking-shell">
+        <div class="booking-intro">
+          <p class="booking-kicker">Appointment request</p>
+          <h2>Book your eye-care visit in under a minute.</h2>
+          <p>Tell us what you need and when you would like to visit. Your request will open in WhatsApp so you can send it directly to the practice.</p>
+          <div class="booking-points">
+            <div><b>1</b><span><strong>Choose a service</strong><small>Eye exam, glasses, contact lenses and more.</small></span></div>
+            <div><b>2</b><span><strong>Pick a preferred date</strong><small>We will confirm the final appointment time with you.</small></span></div>
+            <div><b>3</b><span><strong>Send on WhatsApp</strong><small>No account needed and no unnecessary waiting.</small></span></div>
+          </div>
+          <div class="eye-line" aria-hidden="true"><i></i></div>
+        </div>
+
+        <div class="booking-form-card">
+          <div class="booking-form-heading">
+            <div><h3>Request an appointment</h3><p>Fields marked * are required. We do not save this form on the website.</p></div>
+            <div class="form-eye blink-eye" aria-hidden="true"></div>
+          </div>
+          <form class="booking-form" id="appointmentForm" novalidate>
+            <div class="form-group">
+              <label for="fullName">Full name *</label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number *</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 076 123 4567" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="Optional">
+            </div>
+            <div class="form-group">
+              <label for="service">Service *</label>
+              <select id="service" name="service" required>
+                <option value="">Select a service</option>
+                <option>Comprehensive Eye Exam</option>
+                <option>Spectacles / Glasses</option>
+                <option>Contact Lenses</option>
+                <option>Sunglasses</option>
+                <option>Traffic & Eye Test Certificate</option>
+                <option>Screening of Chronic Eye Conditions</option>
+                <option>General enquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="preferredDate">Preferred date *</label>
+              <input id="preferredDate" name="preferredDate" type="date" required>
+            </div>
+            <div class="form-group">
+              <label for="preferredTime">Preferred time</label>
+              <select id="preferredTime" name="preferredTime">
+                <option value="">Any available time</option>
+                <option>Morning</option>
+                <option>Midday</option>
+                <option>Afternoon</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="notes">Anything we should know?</label>
+              <textarea id="notes" name="notes" placeholder="Optional: symptoms, glasses enquiry, reason for visit, etc."></textarea>
+            </div>
+            <p class="form-row-note">This is an appointment request, not an instant confirmation. The practice will confirm availability with you.</p>
+            <label class="consent-row"><input id="consent" type="checkbox" required><span>I agree to send the information above to Hlungwani T.P Optometrist through WhatsApp so they can respond to my appointment request.</span></label>
+            <div class="form-actions">
+              <button class="btn btn-primary submit-booking" type="submit"><span class="send-state"><i class="mini-spinner" aria-hidden="true"></i><span>Send via WhatsApp</span></span></button>
+              <a class="form-call" href="tel:+27761329121">Prefer to call? 076 132 9121</a>
+            </div>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
