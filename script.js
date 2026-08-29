@@ -17,6 +17,22 @@ if (menuToggle && mainNav) {
   });
 }
 
+// Keep older page markup working after the uploaded image files were moved and renamed.
+const assetAliases = {
+  'assets/logo.jpg': 'assets/logo.png',
+  'assets/hero.jpg': 'assets/hero-eye-exam.png',
+  'assets/comprehensive-eye-exam.jpg': 'assets/service-eye-exam.png',
+  'assets/spectacles.jpg': 'assets/service-spectacles.png',
+  'assets/contact-lenses.jpg': 'assets/service-contact-lenses.png'
+};
+
+document.querySelectorAll('img.local-asset').forEach((img) => {
+  const originalSrc = img.getAttribute('src');
+  if (originalSrc && assetAliases[originalSrc]) {
+    img.setAttribute('src', assetAliases[originalSrc]);
+  }
+});
+
 // Local assets fail gracefully if image files are missing or renamed.
 document.querySelectorAll('.local-asset').forEach((img) => {
   img.addEventListener('error', () => {
