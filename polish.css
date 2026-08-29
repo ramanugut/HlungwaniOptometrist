@@ -1,0 +1,122 @@
+/* Final responsive polish layer. Loaded last by script.js so it can safely refine all existing pages. */
+:root{
+  --brand:#0878d1;
+  --brand-2:#0a63b7;
+  --brand-dark:#0b4f97;
+  --navy:#0b1f52;
+  --ink:#193453;
+  --muted:#657991;
+  --surface:#ffffff;
+  --surface-soft:#f4faff;
+  --line:#d8e8f4;
+  --shadow:0 12px 32px rgba(14,74,126,.07);
+  --shadow-hover:0 18px 42px rgba(14,74,126,.12);
+  --radius:20px;
+}
+
+html{scroll-padding-top:88px}
+body{overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;background:#f7fbff;color:var(--ink)}
+.container{width:min(1180px,calc(100% - 40px))}
+.btn{min-height:46px;padding:11px 21px;font-size:14px;line-height:1.1}
+.btn:focus-visible,.main-nav a:focus-visible,.whatsapp-float:focus-visible{outline:3px solid rgba(8,120,209,.25);outline-offset:3px}
+
+/* Header */
+.topbar-inner{min-height:40px}.topbar{font-size:12px}
+.nav-wrap{height:76px;gap:22px}
+.brand{min-width:180px}.brand-logo{width:72px;height:72px;margin-top:0;object-fit:contain}
+.main-nav{gap:24px}.main-nav a{font-size:14px;font-weight:600}.main-nav a.active:after{bottom:-10px}
+.site-header{box-shadow:0 5px 20px rgba(9,69,119,.07)}
+
+/* Home */
+.hero{min-height:500px}
+.hero-content{padding-top:62px;padding-bottom:62px}
+.hero-copy{max-width:540px}
+.hero h1{font-size:62px;line-height:.98;letter-spacing:-2.3px}
+.hero-text{font-size:17px;max-width:455px}
+.hero-actions{margin:20px 0 18px}.trust-row{font-size:12px;gap:12px 16px}
+.priority-badge{width:118px;height:118px}
+.section{padding:40px 0 30px}.section-heading{margin-bottom:22px}.section-heading h2{font-size:34px}
+.service-grid{gap:14px}.service-card{min-height:228px;padding:15px 12px 14px;border-radius:18px;box-shadow:var(--shadow)}
+.service-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px)}
+.service-image-wrap{width:90px;height:90px;margin-bottom:10px}.service-card h3{font-size:15px;line-height:1.16;margin:7px 0 6px}.service-card p{font-size:12px;line-height:1.45;min-height:35px}
+.service-card>a{width:30px;height:30px;font-size:21px}
+.lower-section{padding:0 0 24px}.lower-grid{gap:16px}.benefits-panel{padding:24px;border-radius:20px}.benefits-panel h2{font-size:24px;margin-bottom:20px}.benefits-grid strong{font-size:13px}.benefits-grid small{font-size:10.5px}
+.appointment-panel{min-height:200px;padding:28px;border-radius:20px}.appointment-copy h2{font-size:24px}.appointment-copy p{font-size:13px}.contact-pill{padding:9px 15px;font-size:12px}
+.appointment-art.appointment-art-photo{width:38%!important;opacity:.48!important}
+.about-strip{padding:18px 0}.about-grid>div{padding:16px}.about-grid strong{font-size:14px}.about-grid span{font-size:12px}
+.page-home .page-section.alt{padding:46px 0}.page-home .info-card{padding:20px}
+
+/* Shared inner pages */
+.page-hero{padding:58px 0 54px}.page-hero-inner{max-width:760px}.page-hero h1{font-size:50px;line-height:1.03;letter-spacing:-1.8px}.page-hero p{font-size:16px;line-height:1.65;margin-top:16px}.page-hero-actions{margin-top:22px}
+.page-section{padding:52px 0}.page-section.alt{background:#eef8ff}.section-title{margin-bottom:26px}.section-title h2{font-size:32px}.section-title p{font-size:15px}
+.info-grid{gap:16px}.info-card{padding:22px;border-radius:18px;box-shadow:var(--shadow)}.info-card .card-icon{width:44px;height:44px;border-radius:13px;font-size:22px;margin-bottom:13px}.info-card h3{font-size:18px}.info-card p{font-size:13.5px;line-height:1.58}
+.split-layout{gap:36px}.visual-panel{min-height:330px;border-radius:22px}.wired-photo-panel .wired-photo{object-position:center}.copy-block h2{font-size:32px}.copy-block p{font-size:15px;line-height:1.68}.tick-list{gap:9px;margin-top:17px}.tick-list li{font-size:14px}.tick-list li:before{width:22px;height:22px;flex-basis:22px}
+.simple-cta{padding:24px 28px;border-radius:20px;margin-top:26px}.simple-cta h2{font-size:25px}.simple-cta p{font-size:14px}
+
+/* Services */
+.services-photo-strip{grid-template-columns:1.05fr .95fr!important;gap:0!important;margin-bottom:22px!important;border-radius:20px!important;box-shadow:var(--shadow)!important}.services-photo-strip img{height:215px!important}.services-photo-strip div{padding:24px!important}.services-photo-strip h3{font-size:24px!important}.services-photo-strip p{font-size:14px!important;line-height:1.6!important}
+.service-detail-grid{gap:16px}.service-detail{grid-template-columns:68px 1fr;gap:16px;padding:21px;border-radius:18px;box-shadow:var(--shadow)}
+.service-detail-icon,.service-detail-thumb{width:68px!important;height:68px!important;border-radius:17px!important}.service-detail h3{font-size:19px}.service-detail p{font-size:13.5px;line-height:1.55;margin-bottom:10px}.service-detail a{font-size:12.5px}
+
+/* Conditions */
+.condition-grid{gap:14px}.condition-card{padding:20px;border-radius:18px;box-shadow:0 8px 24px rgba(17,82,138,.045)}.condition-card h3{font-size:18px;margin-bottom:6px}.condition-card p{font-size:13.5px;line-height:1.58}.warning-box{padding:16px 18px;border-radius:14px;font-size:12.5px}
+
+/* Contact */
+.contact-grid{grid-template-columns:1fr 1.05fr;gap:20px}.contact-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.contact-card{padding:18px;border-radius:17px;box-shadow:var(--shadow)}.contact-card strong{font-size:15px}.contact-card p,.contact-card a{font-size:13.5px}.contact-cta{padding:26px;border-radius:20px}.contact-cta h2{font-size:29px}.contact-cta p{font-size:14px}.faq-list{gap:9px}.faq-item{padding:15px 17px;border-radius:14px}.faq-item h3{font-size:15px}.faq-item p{font-size:12.5px}
+
+/* Appointment */
+.booking-section{padding:44px 0 52px}.booking-shell{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:20px}.booking-intro,.booking-form-card{border-radius:20px;box-shadow:var(--shadow)}.booking-intro{padding:27px}.booking-intro h2{font-size:33px}.booking-intro>p{font-size:14px;line-height:1.58;margin:12px 0 18px}.booking-points{gap:10px;margin-top:18px}.booking-points strong{font-size:13px}.booking-points small{font-size:11px}.booking-points b{width:25px;height:25px;flex-basis:25px}.booking-brand-art{display:none!important}
+.booking-form-card{padding:25px}.booking-form-heading{margin-bottom:18px}.booking-form-heading h3{font-size:23px}.booking-form-heading p{font-size:12px}.booking-form{gap:13px}.form-group{gap:6px}.form-group label{font-size:12px}.form-group input,.form-group select{min-height:48px;padding:0 13px;font-size:14px}.form-group textarea{min-height:94px;padding:12px 13px;font-size:14px}.form-row-note{margin:1px 0;font-size:10.5px}.consent-row{padding:10px 12px}.form-actions{gap:10px}.submit-booking{min-width:210px}.form-call{font-size:11.5px}
+
+/* Image wiring moved out of JS */
+.wired-photo-panel{position:relative!important;display:block!important;background:#eaf5ff!important;overflow:hidden!important}.wired-photo-panel .wired-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.service-detail-thumb{object-fit:cover;border:1px solid #d1e8f8;background:#eef7ff}.appointment-art.appointment-art-photo{right:0;top:0;bottom:0;height:100%;font-size:0;transform:none;overflow:hidden}.appointment-art.appointment-art-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* Footer + WhatsApp */
+.footer-main{padding:24px 0}.footer-main strong{font-size:14px}.footer-main p,.footer-main a{font-size:12px}.footer-bottom{padding:10px 5%;font-size:11px}
+.whatsapp-float{width:54px;height:54px;right:18px;bottom:18px;box-shadow:0 10px 28px rgba(0,0,0,.22);transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}.whatsapp-float svg{width:30px;height:30px}.whatsapp-float.is-context-hidden,.whatsapp-float.is-footer-hidden{opacity:0;transform:translateY(12px) scale(.84);pointer-events:none}.whatsapp-float:hover{box-shadow:0 13px 32px rgba(0,0,0,.27)}
+
+@media(max-width:1180px){
+  .container{width:min(1040px,calc(100% - 36px))}.main-nav{gap:17px}.main-nav a{font-size:13px}.hero h1{font-size:57px}.service-grid{grid-template-columns:repeat(3,1fr)}.service-card{min-height:215px}.nav-cta{display:none}
+}
+
+@media(max-width:900px){
+  html{scroll-padding-top:72px}.container{width:calc(100% - 32px)}body.nav-open{overflow:hidden}
+  .topbar{display:none}.nav-wrap{height:68px}.brand-logo{width:60px;height:60px}.brand{min-width:auto}.menu-toggle{width:42px;height:42px;font-size:27px}
+  .main-nav{top:68px;left:12px;right:12px;padding:7px 14px 13px;border:1px solid #e3eef6;border-radius:0 0 18px 18px;box-shadow:0 18px 36px rgba(5,55,96,.14)}.main-nav a{padding:12px 2px;font-size:14px}.main-nav a:last-child{border-bottom:0}
+  .hero{min-height:510px}.hero-content{padding-top:32px;padding-bottom:30px}.hero h1{font-size:48px}.hero-text{font-size:15px}.hero-photo{object-position:66% 50%}.hero-swoosh,.priority-badge{display:none}.hero-actions{gap:9px}.hero-actions .btn{min-height:46px}.trust-row{font-size:10.5px}
+  .service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.service-card{min-height:0;padding:11px 8px 12px}.service-image-wrap{width:70px;height:70px}.service-card h3{font-size:13px}.service-card p{font-size:10.5px;min-height:30px}.service-card>a{width:28px;height:28px}
+  .section{padding:28px 0 22px}.section-heading{margin-bottom:16px}.section-heading h2{font-size:29px}.section-heading i{width:65px}
+  .lower-grid{grid-template-columns:1fr;gap:10px}.benefits-panel{padding:18px 14px}.benefits-panel h2{font-size:22px}.benefits-grid{grid-template-columns:repeat(2,1fr);gap:14px 8px}.benefits-grid>div{border:0;padding:0 5px}.benefits-grid span{font-size:25px}.benefits-grid strong{font-size:12px}.benefits-grid small{font-size:9.5px}.appointment-panel{min-height:0;padding:17px}.appointment-copy{max-width:100%}.appointment-art.appointment-art-photo{display:none!important}.contact-pill{width:100%;text-align:center;margin:6px 0}.about-strip{display:none}
+  .page-home .page-section.alt{padding:32px 0}
+  .page-hero{padding:34px 0 32px}.page-hero h1{font-size:39px;line-height:1.04;letter-spacing:-1.2px}.page-hero p{font-size:15px;line-height:1.58;margin-top:13px}.page-hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.page-hero-actions .btn{width:100%;min-height:46px;padding:9px 12px;font-size:12.5px}
+  .page-section{padding:35px 0}.section-title{margin-bottom:20px}.section-title h2{font-size:28px}.section-title p{font-size:14px}.split-layout,.contact-grid{grid-template-columns:1fr;gap:18px}.visual-panel{min-height:245px;border-radius:18px}.copy-block h2{font-size:28px}.copy-block p{font-size:14.5px;line-height:1.62}.tick-list li{font-size:13.5px}
+  .info-grid{grid-template-columns:1fr;gap:10px}.info-card{padding:16px;border-radius:16px}.info-card .card-icon{width:40px;height:40px;margin-bottom:10px}.info-card h3{font-size:17px}.info-card p{font-size:13px}
+  .simple-cta{padding:19px;border-radius:17px;gap:14px}.simple-cta h2{font-size:22px}.simple-cta p{font-size:13px}.simple-cta .btn{min-height:43px;padding:9px 18px}
+  .service-detail-grid,.condition-grid{grid-template-columns:1fr;gap:10px}.service-detail{grid-template-columns:64px 1fr;gap:13px;padding:16px;border-radius:16px}.service-detail-icon,.service-detail-thumb{width:64px!important;height:64px!important;border-radius:15px!important}.service-detail h3{font-size:18px;line-height:1.18}.service-detail p{font-size:13px;line-height:1.5;margin-bottom:8px}.service-detail a{font-size:12px}
+  .services-photo-strip{grid-template-columns:1fr!important;margin-bottom:15px!important;border-radius:16px!important}.services-photo-strip img{height:160px!important}.services-photo-strip div{padding:16px!important}.services-photo-strip h3{font-size:20px!important}.services-photo-strip p{font-size:13px!important}
+  .condition-card{padding:15px 16px;border-radius:15px}.condition-card h3{font-size:17px}.condition-card p{font-size:13px;line-height:1.52}.warning-box{margin-top:15px;padding:14px 15px;font-size:12px}
+  .contact-stack{grid-template-columns:1fr;gap:8px}.contact-card{padding:14px 16px;border-radius:15px}.contact-card strong{font-size:14px;margin-bottom:3px}.contact-card p,.contact-card a{font-size:13px}.contact-cta{padding:19px;border-radius:17px}.contact-cta h2{font-size:23px}.contact-cta p{font-size:13px;margin-bottom:15px}.faq-list{gap:7px}.faq-item{padding:13px 15px}.faq-item h3{font-size:14px}.faq-item p{font-size:12px}
+  .booking-section{padding:24px 0 32px}.booking-shell{grid-template-columns:1fr;gap:11px}.booking-intro{padding:18px;border-radius:17px}.booking-intro h2{font-size:26px}.booking-intro>p{font-size:13.5px;margin:10px 0 14px}.booking-points{gap:7px;margin-top:13px}.booking-points div{gap:9px}.booking-points strong{font-size:12.5px}.booking-points small{font-size:10.5px}.eye-line{display:none}.booking-form-card{padding:17px;border-radius:17px}.booking-form-heading{margin-bottom:14px}.booking-form-heading h3{font-size:21px}.form-eye{display:none}.booking-form{grid-template-columns:1fr;gap:10px}.form-group.full,.form-row-note,.consent-row,.form-actions,.form-status{grid-column:1}.form-group label{font-size:12.5px}.form-group input,.form-group select{min-height:52px;padding:0 13px;font-size:16px;border-radius:12px}.form-group textarea{min-height:102px;padding:12px 13px;font-size:16px;border-radius:12px}.form-row-note{font-size:10.5px;line-height:1.4}.consent-row{font-size:10.5px;padding:9px 10px}.form-actions{flex-direction:column;align-items:stretch}.submit-booking{width:100%;min-width:0;min-height:48px}.form-call{text-align:center}.booking-brand-art{display:none!important}
+  .footer-main{grid-template-columns:1fr 1fr;gap:12px 20px;padding:19px 0}.footer-main>div:first-child{grid-column:1/-1}.footer-main strong{font-size:13px}.footer-main p,.footer-main a{font-size:11px}.footer-bottom{font-size:10px;padding:8px 4%}
+  .whatsapp-float{width:48px;height:48px;right:14px;bottom:14px}.whatsapp-float svg{width:27px;height:27px}
+}
+
+@media(max-width:640px){
+  .container{width:calc(100% - 28px)}.nav-wrap{height:66px}.brand-logo{width:58px;height:58px}.main-nav{top:66px}
+  .hero{min-height:500px}.hero-content{padding-top:28px}.hero h1{font-size:clamp(38px,11.4vw,44px)}.hero-text{font-size:14px;max-width:330px}.hero-actions{width:min(100%,310px);flex-direction:column;gap:8px}.hero-actions .btn{width:100%}.trust-row{display:grid;grid-template-columns:repeat(2,max-content);gap:5px 10px;max-width:320px}
+  .section-heading h2{font-size:27px}.service-image-wrap{width:64px;height:64px}.service-card h3{font-size:12.5px}.service-card p{font-size:10px}
+  .page-hero{padding:30px 0 28px}.breadcrumb{font-size:11.5px;margin-bottom:10px}.page-kicker{font-size:10.5px}.page-hero h1{font-size:clamp(34px,9.7vw,39px)}.page-hero p{font-size:14px}.page-hero-actions{gap:8px}.page-hero-actions .btn{font-size:12px}
+  .page-section{padding:30px 0}.section-title h2{font-size:26px}.section-title p{font-size:13.5px}
+  .service-detail{grid-template-columns:58px 1fr;padding:14px;gap:12px}.service-detail-icon,.service-detail-thumb{width:58px!important;height:58px!important}.service-detail h3{font-size:17px}.service-detail p{font-size:12.5px}.service-detail a{font-size:11.5px}
+  .services-photo-strip img{height:145px!important}.services-photo-strip div{padding:14px!important}.services-photo-strip h3{font-size:19px!important}
+  .visual-panel{min-height:220px}.copy-block h2{font-size:26px}.copy-block p{font-size:14px}.tick-list{gap:8px}.tick-list li{font-size:13px}
+  .condition-card{padding:14px}.condition-card h3{font-size:16.5px}.condition-card p{font-size:12.5px}.warning-box{font-size:11.5px}
+  .booking-intro{padding:16px}.booking-intro h2{font-size:24px}.booking-intro>p{font-size:13px}.booking-points b{width:23px;height:23px;flex-basis:23px;font-size:11px}.booking-points strong{font-size:12px}.booking-points small{font-size:10px}.booking-form-card{padding:15px}.booking-form-heading h3{font-size:20px}
+  .footer-main{padding:17px 0}.whatsapp-float{width:46px;height:46px;right:12px;bottom:12px}
+}
+
+@media(max-width:380px){
+  .page-hero-actions{grid-template-columns:1fr}.footer-main{grid-template-columns:1fr}.footer-main>div:first-child{grid-column:auto}.hero h1{font-size:37px}.service-card h3{font-size:12px}.service-card p{font-size:9.5px}.service-detail{grid-template-columns:54px 1fr}.service-detail-icon,.service-detail-thumb{width:54px!important;height:54px!important}.service-detail h3{font-size:16px}
+}
+
+@media(prefers-reduced-motion:reduce){.whatsapp-float,.service-card,.btn{transition:none!important}}
