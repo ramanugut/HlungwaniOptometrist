@@ -1,0 +1,426 @@
+/* Mobile-first refinements for the homepage. Desktop styles remain in styles.css. */
+
+@media (max-width: 900px) {
+  .nav-wrap {
+    height: 68px;
+    gap: 14px;
+  }
+
+  .brand-logo {
+    width: 64px;
+    height: 64px;
+    margin-top: 0;
+  }
+
+  .brand-fallback strong {
+    font-size: 17px;
+  }
+
+  .brand-fallback span {
+    font-size: 13px;
+  }
+
+  .menu-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+  }
+
+  .main-nav {
+    top: 68px;
+    max-height: calc(100vh - 68px);
+    overflow-y: auto;
+  }
+
+  .hero {
+    min-height: 520px;
+  }
+
+  .hero-content {
+    padding-top: 34px;
+    padding-bottom: 32px;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(247,252,255,.99) 0%,
+      rgba(247,252,255,.96) 48%,
+      rgba(247,252,255,.66) 72%,
+      rgba(247,252,255,.2) 100%
+    );
+  }
+
+  .hero-photo {
+    object-position: 68% center;
+  }
+
+  .hero-swoosh,
+  .priority-badge {
+    display: none;
+  }
+
+  .hero-copy {
+    max-width: 520px;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+    line-height: .98;
+  }
+
+  .hero-text {
+    margin-top: 14px;
+  }
+
+  .hero-actions {
+    margin: 18px 0 14px;
+  }
+
+  .section {
+    padding: 22px 0 14px;
+  }
+
+  .section-heading {
+    margin-bottom: 16px;
+  }
+
+  .lower-section {
+    padding: 0 0 12px;
+  }
+
+  .about-strip {
+    padding: 10px 0;
+  }
+
+  .footer-main {
+    padding: 20px 0;
+  }
+
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .whatsapp-float svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(92%, 100%);
+  }
+
+  .nav-wrap {
+    height: 66px;
+  }
+
+  .main-nav {
+    top: 66px;
+    padding: 6px 4% 12px;
+  }
+
+  .main-nav a {
+    padding: 12px 2px;
+    font-size: 14px;
+  }
+
+  .brand-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .brand-fallback {
+    line-height: 1.08;
+  }
+
+  .brand-fallback strong {
+    font-size: 16px;
+  }
+
+  .brand-fallback span {
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 500px;
+  }
+
+  .hero-photo {
+    object-position: 66% 52%;
+  }
+
+  .hero-content {
+    padding-top: 28px;
+    padding-bottom: 26px;
+  }
+
+  .eyebrow {
+    margin-bottom: 7px;
+    font-size: 13px;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 11.5vw, 44px);
+    letter-spacing: -1.7px;
+  }
+
+  .hero-text {
+    max-width: 330px;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .hero-actions {
+    width: min(100%, 310px);
+    gap: 8px;
+    margin: 17px 0 13px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .trust-row {
+    max-width: 320px;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 6px 12px;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+
+  .section {
+    padding: 18px 0 12px;
+  }
+
+  .section-heading {
+    gap: 11px;
+    margin-bottom: 13px;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+
+  .section-heading i {
+    width: 46px;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .service-card {
+    min-height: 0;
+    padding: 10px 7px 11px;
+    border-radius: 15px;
+  }
+
+  .service-image-wrap {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 6px;
+    border-width: 2px;
+    font-size: 28px;
+  }
+
+  .service-icon small {
+    font-size: 14px;
+  }
+
+  .eye-symbol {
+    font-size: 32px;
+  }
+
+  .service-card h3 {
+    margin: 5px 0 4px;
+    font-size: 13px;
+    line-height: 1.12;
+  }
+
+  .service-card p {
+    min-height: 31px;
+    margin-bottom: 7px;
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
+
+  .service-card > a {
+    width: 27px;
+    height: 27px;
+    font-size: 20px;
+  }
+
+  /* Better crops for the product photos used in the small circular cards. */
+  .service-card:nth-child(2) .service-image-wrap img {
+    object-position: 52% 58%;
+    transform: scale(1.12);
+  }
+
+  .service-card:nth-child(3) .service-image-wrap img {
+    object-position: 55% 68%;
+    transform: scale(1.3);
+  }
+
+  .service-card:nth-child(4) .service-image-wrap img {
+    object-position: 50% 55%;
+    transform: scale(1.12);
+  }
+
+  .lower-grid {
+    gap: 8px;
+  }
+
+  .benefits-panel {
+    padding: 16px 11px;
+    border-radius: 16px;
+  }
+
+  .benefits-panel h2 {
+    margin-bottom: 14px;
+    font-size: 20px;
+    line-height: 1.15;
+  }
+
+  .benefits-grid {
+    gap: 14px 8px;
+  }
+
+  .benefits-grid > div {
+    padding: 0 5px;
+  }
+
+  .benefits-grid span {
+    font-size: 24px;
+  }
+
+  .benefits-grid strong {
+    margin: 3px 0;
+    font-size: 12px;
+  }
+
+  .benefits-grid small {
+    font-size: 9.5px;
+    line-height: 1.35;
+  }
+
+  .appointment-panel {
+    min-height: 0;
+    padding: 17px 15px;
+    border-radius: 16px;
+  }
+
+  .appointment-copy {
+    max-width: 100%;
+  }
+
+  .appointment-copy h2 {
+    font-size: 20px;
+  }
+
+  .appointment-copy p {
+    margin: 3px 0 10px;
+    font-size: 12px;
+  }
+
+  .contact-pill {
+    width: 100%;
+    margin: 6px 0;
+    padding: 9px 12px;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .appointment-art {
+    display: none;
+  }
+
+  /* The three large cards added little value on mobile and made the page too long. */
+  .about-strip {
+    display: none;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .footer-main > div {
+    gap: 3px;
+  }
+
+  .footer-main strong {
+    font-size: 13px;
+  }
+
+  .footer-main p,
+  .footer-main a {
+    font-size: 11px;
+  }
+
+  .footer-bottom {
+    padding: 9px 4%;
+    font-size: 10px;
+  }
+
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    right: 12px;
+    bottom: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.22);
+  }
+
+  .whatsapp-float svg {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero {
+    min-height: 480px;
+  }
+
+  .hero h1 {
+    font-size: 37px;
+  }
+
+  .hero-text {
+    max-width: 285px;
+    font-size: 13px;
+  }
+
+  .hero-actions {
+    width: min(100%, 285px);
+  }
+
+  .trust-row {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 285px;
+    gap: 5px 8px;
+  }
+
+  .service-card h3 {
+    font-size: 12.5px;
+  }
+
+  .service-card p {
+    font-size: 10px;
+  }
+}
