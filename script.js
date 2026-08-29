@@ -17,7 +17,7 @@ if (menuToggle && mainNav) {
   });
 }
 
-// Local assets fail gracefully while GitHub image files are being changed.
+// Local assets fail gracefully if image files are missing or renamed.
 document.querySelectorAll('.local-asset').forEach((img) => {
   img.addEventListener('error', () => {
     const fallback = img.dataset.fallback;
@@ -33,7 +33,7 @@ document.querySelectorAll('.local-asset').forEach((img) => {
   }, { once: true });
 });
 
-// Fast optometry-style loader. It never blocks the page for more than a moment.
+// Lightweight eye loader across all pages.
 const pageLoader = document.getElementById('pageLoader');
 const hideLoader = () => {
   if (!pageLoader || pageLoader.classList.contains('is-hidden')) return;
@@ -48,13 +48,17 @@ if (document.readyState === 'complete') {
   setTimeout(hideLoader, 1100);
 }
 
-// Smooth, light reveal animation. Disabled automatically for reduced-motion users.
+// Smooth reveals, kept small for performance and disabled for reduced-motion users.
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!reduceMotion && 'IntersectionObserver' in window) {
   document.body.classList.add('motion-ready');
-  const revealItems = document.querySelectorAll('.service-card,.benefits-panel,.appointment-panel,.booking-intro,.booking-form-card,.about-grid>div');
-  revealItems.forEach((item) => item.classList.add('reveal'));
+  const revealItems = document.querySelectorAll([
+    '.service-card', '.benefits-panel', '.appointment-panel', '.booking-intro', '.booking-form-card',
+    '.about-grid>div', '.info-card', '.service-detail', '.condition-card', '.contact-card', '.contact-cta',
+    '.faq-item', '.simple-cta', '.visual-panel', '.copy-block'
+  ].join(','));
 
+  revealItems.forEach((item) => item.classList.add('reveal'));
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -66,19 +70,14 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
   revealItems.forEach((item) => revealObserver.observe(item));
 }
 
-// Active navigation state.
+// Home-page hash navigation support, if hash links are ever used again.
 const sections = [...document.querySelectorAll('main section[id]')];
 const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
-
-if ('IntersectionObserver' in window) {
+if (navLinks.length && 'IntersectionObserver' in window) {
   const navObserver = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (!visible) return;
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
-    });
+    navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
   }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
   sections.forEach((section) => navObserver.observe(section));
 }
@@ -96,22 +95,14 @@ if (preferredDate) {
   preferredDate.min = localToday;
 }
 
-// Clicking a service card also preselects the same service in the form.
-document.querySelectorAll('.service-card > a[href="#appointment"]').forEach((link) => {
-  link.addEventListener('click', () => {
-    if (!serviceSelect) return;
-    const title = link.closest('.service-card')?.querySelector('h3')?.textContent.replace(/\s+/g, ' ').trim();
-    const map = {
-      'Comprehensive Eye Exam': 'Comprehensive Eye Exam',
-      'Spectacles / Glasses': 'Spectacles / Glasses',
-      'Contact Lenses': 'Contact Lenses',
-      'Sunglasses': 'Sunglasses',
-      'Traffic & Eye Test Certificate': 'Traffic & Eye Test Certificate',
-      'Screening of Chronic Eye Conditions': 'Screening of Chronic Eye Conditions'
-    };
-    if (title && map[title]) serviceSelect.value = map[title];
-  });
-});
+// Preselect a service when coming from a service link such as appointment.html?service=Contact%20Lenses.
+if (serviceSelect) {
+  const requestedService = new URLSearchParams(window.location.search).get('service');
+  if (requestedService) {
+    const match = [...serviceSelect.options].find((option) => option.value === requestedService || option.text === requestedService);
+    if (match) serviceSelect.value = match.value;
+  }
+}
 
 if (appointmentForm) {
   appointmentForm.addEventListener('submit', (event) => {
@@ -151,7 +142,6 @@ if (appointmentForm) {
     ].filter(Boolean).join('\n');
 
     const whatsappUrl = `https://wa.me/27761329121?text=${encodeURIComponent(message)}`;
-
     if (submitBooking) submitBooking.classList.add('is-sending');
     if (formStatus) formStatus.textContent = 'Opening WhatsApp with your appointment request…';
 
