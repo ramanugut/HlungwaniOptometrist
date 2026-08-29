@@ -16,3 +16,34 @@ if (menuToggle && mainNav) {
     });
   });
 }
+
+document.querySelectorAll('.local-asset').forEach((img) => {
+  img.addEventListener('error', () => {
+    const fallback = img.dataset.fallback;
+    if (fallback && img.src !== fallback) {
+      img.src = fallback;
+      return;
+    }
+    if (img.classList.contains('brand-logo')) {
+      img.style.display = 'none';
+      const brandFallback = document.querySelector('.brand-fallback');
+      if (brandFallback) brandFallback.style.display = 'flex';
+    }
+  }, { once: true });
+});
+
+const sections = [...document.querySelectorAll('main section[id]')];
+const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
+    });
+  }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
+  sections.forEach((section) => observer.observe(section));
+}
