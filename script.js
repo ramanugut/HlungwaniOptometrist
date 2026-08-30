@@ -276,3 +276,76 @@ if (appointmentForm) {
     }, 650);
   });
 }
+
+// Site-wide Back to Top button. It is injected once so every page gets the same behaviour.
+const backToTop = document.createElement('button');
+backToTop.type = 'button';
+backToTop.className = 'back-to-top';
+backToTop.setAttribute('aria-label', 'Back to top');
+backToTop.setAttribute('title', 'Back to top');
+backToTop.innerHTML = '<span aria-hidden="true">↑</span>';
+document.body.appendChild(backToTop);
+
+const backToTopStyles = document.createElement('style');
+backToTopStyles.textContent = `
+  .back-to-top{
+    position:fixed;
+    right:82px;
+    bottom:21px;
+    width:50px;
+    height:50px;
+    border:1px solid rgba(8,120,209,.16);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:rgba(255,255,255,.96);
+    color:#0878d1;
+    box-shadow:0 10px 28px rgba(14,74,126,.16);
+    font:700 25px/1 Arial,sans-serif;
+    cursor:pointer;
+    z-index:999;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(12px) scale(.88);
+    transition:opacity .2s ease,visibility .2s ease,transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .back-to-top.is-visible{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+  }
+  .back-to-top:hover{
+    background:#0878d1;
+    color:#fff;
+    box-shadow:0 13px 32px rgba(8,120,209,.28);
+  }
+  .back-to-top:focus-visible{
+    outline:3px solid rgba(8,120,209,.25);
+    outline-offset:3px;
+  }
+  @media(max-width:900px){
+    .back-to-top{
+      right:76px;
+      bottom:20px;
+      width:46px;
+      height:46px;
+      font-size:22px;
+    }
+  }
+  @media(prefers-reduced-motion:reduce){
+    .back-to-top{transition:none}
+  }
+`;
+document.head.appendChild(backToTopStyles);
+
+const updateBackToTop = () => {
+  backToTop.classList.toggle('is-visible', window.scrollY > 480);
+};
+
+window.addEventListener('scroll', updateBackToTop, { passive: true });
+updateBackToTop();
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+});
